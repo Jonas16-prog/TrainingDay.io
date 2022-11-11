@@ -31,6 +31,8 @@ html_theme = 'pydata_sphinx_theme'
 html_static_path = ['_static']
 html_title = "Jonas"
 
+html_css_files = ["custom.css"]
+
 html_theme_options = {
   "github_url": "https://github.com/vferat/",
   "icon_links": [
@@ -55,5 +57,13 @@ html_theme_options = {
 
 html_sidebars = {
     "index": ["sidebar.html"],
-    "about": ["sidebar.html"]
+    "about": ["sidebar.html"],
+    "blog":["tagcloud.html", "archives.html"],
+    "blog/**":["tagcloud.html", "archives.html"]
 }
+
+## blog
+extensions += ["ablog"]
+blog_title = "mon blog"
+blog_path = "blog"
+blog_post_pattern = "posts/*/*"
