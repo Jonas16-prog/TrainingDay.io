@@ -1,22 +1,22 @@
-nom:Publier
-sur :
-  Poussez :
-    Succursales :
-    - principal
-Emplois:
-  Construire:
+name: Publish
+on:
+  push:
+    branches:
+    - main
+jobs:
+  build:
     runs-on: ubuntu-latest
-    Étapes :
-    - utilisation:actions/configuration-python@v2
-    - utilisation:actions/checkout@v2
-      avec :
-        fetch-depth:0#sinon, vous ne parviendrez pas à pousser refs vers dest repo
-    - nom:Générer et valider
-      utilisation:sphinx-notes/pages@v2
-      avec :
+    steps:
+    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Build and Commit
+      uses: sphinx-notes/pages@v2
+      with:
         documentation_path: './source'
-    - nom:Modifications push
-      utilisation:ad-m/github-push-action@master
-      avec :
-        github_token:${{ secrets. GITHUB_TOKEN }}
-        branche:gh-pages
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
