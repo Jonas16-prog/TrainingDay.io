@@ -52,3 +52,8 @@ html_theme_options = {
         ],
         "search_bar_text": "Search this site...",
 }
+
+html_sidebars = {
+    "index": ["sidebar.html"],
+    "about": ["sidebar.html"]
+}
