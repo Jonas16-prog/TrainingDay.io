@@ -1,0 +1,22 @@
+nom:Publier
+sur :
+  Poussez :
+    Succursales :
+    - principal
+Emplois:
+  Construire:
+    runs-on: ubuntu-latest
+    Étapes :
+    - utilisation:actions/configuration-python@v2
+    - utilisation:actions/checkout@v2
+      avec :
+        fetch-depth:0#sinon, vous ne parviendrez pas à pousser refs vers dest repo
+    - nom:Générer et valider
+      utilisation:sphinx-notes/pages@v2
+      avec :
+        documentation_path: './source'
+    - nom:Modifications push
+      utilisation:ad-m/github-push-action@master
+      avec :
+        github_token:${{ secrets. GITHUB_TOKEN }}
+        branche:gh-pages
